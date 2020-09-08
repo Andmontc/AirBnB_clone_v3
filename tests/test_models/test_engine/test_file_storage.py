@@ -124,6 +124,7 @@ class TestFileStorage(unittest.TestCase):
         validate = storage.get(User, u.id)
         self.assertTrue(validate)
 
+    @unittest.skipIf(models.storage_t == 'db', "not testing file storage")
     def test_count(self):
         """ Test count method """
         count = storage.count()
