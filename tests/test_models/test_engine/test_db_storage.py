@@ -91,17 +91,17 @@ class TestFileStorage(unittest.TestCase):
     def test_get(self):
         """" Test get method """
         u = User()
-        storage.new(u)
-        storage.save()
-        validate = storage.get(User, u.id)
+        models.storage.new(u)
+        models.storage.save()
+        validate = models.storage.get(User, u.id)
         self.assertTrue(validate)
 
     @unittest.skipIf(models.storage_t == 'db', "not testing file storage")
     def test_count(self):
         """ Test count method """
-        count = storage.count()
+        count = models.storage.count()
         u = User()
-        storage.new(u)
-        storage.save()
-        count_user = storage.count(User)
+        models.storage.new(u)
+        models.storage.save()
+        count_user = models.storage.count(User)
         self.assertNotEqual(count, count_user)
