@@ -118,18 +118,22 @@ class TestFileStorage(unittest.TestCase):
     @unittest.skipIf(models.storage_t == 'db', "not testing file storage")
     def test_get(self):
         """" Test get method """
-        u = User()
+        u = State(name='Cartagena')
         storage.new(u)
         storage.save()
-        validate = storage.get(User, u.id)
+        validate = storage.get(State, u.id)
         self.assertTrue(validate)
 
     @unittest.skipIf(models.storage_t == 'db', "not testing file storage")
     def test_count(self):
         """ Test count method """
         count = storage.count()
-        u = User()
+        u = State(name='Cartagena')
         storage.new(u)
         storage.save()
-        count_user = storage.count(User)
-        self.assertNotEqual(count, count_user)
+        count_state = storage.count(State)
+        self.assertNotEqual(count, count_state)
+
+
+if __name__ == "__main__":
+    unittest.main()
