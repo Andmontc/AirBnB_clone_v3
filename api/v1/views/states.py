@@ -44,7 +44,7 @@ def post_state():
     new_state = State(**body)
     storage.new(new_state)
     storage.save()
-    return jsonify(new_state.to_dict()), 201
+    return make_response(jsonify(new_state.to_dict()), 201)
 
 
 @app_views.route('/states/<state_id>', methods=['PUT'], strict_slashes=False)
@@ -62,4 +62,4 @@ def put_state_by_id(state_id=None):
         storage.save()
         return make_response(jsonify(state.to_dict()), 200)
     else:
-        abort(400)
+        abort(404)
