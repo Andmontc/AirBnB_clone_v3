@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """ State module """
 from models import storage
-from api.v1.views import app_views, State, City, Place
+from api.v1.views import app_views, State, City, Place, User
 from flask import jsonify, request, abort, make_response
 
 
@@ -48,7 +48,8 @@ def post_place(city_id=None):
     if 'name' not in body:
         return make_response(jsonify({'error': 'Missing name'}), 400)
     city = storage.get(City, city_id)
-    if city:
+    user = storage.get(User, body['user_id'])
+    if city and user:
         new_place = Place(**body)
         new_place.city_id = city.id
         storage.new(new_place)
